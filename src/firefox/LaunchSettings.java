@@ -22,6 +22,8 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 		sleep(3000);
 
+		Utils.launchTcpdump("firefox", 200);
+
 		visitWebsite("http://multpath-tcp.org");
 		sleep(20000);
 		visitWebsite("https://www.flickr.com/");
@@ -33,6 +35,9 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		visitWebsite("http://www.rtbf.be/");
 		sleep(20000);
 		visitWebsite("http://www.alexa.com/topsites");
+		sleep(20000);
+
+		Utils.killTcpdump();
 	}
 
 }
