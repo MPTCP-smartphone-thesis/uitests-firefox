@@ -1,4 +1,4 @@
-uitests-snapchat
+uitests-firefox
 ================
 
-A UI test for the Snapchat Android application
+A UI test for the Firefox Android application
