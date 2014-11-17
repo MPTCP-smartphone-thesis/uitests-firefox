@@ -34,7 +34,25 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		sleep(20000);
 		visitWebsite("http://www.rtbf.be/");
 		sleep(20000);
-		visitWebsite("http://www.alexa.com/topsites");
+		visitWebsite("http://www.google.com/");
+		sleep(20000);
+		visitWebsite("http://www.facebook.com/");
+		sleep(20000);
+		visitWebsite("http://www.youtube.com/");
+		sleep(20000);
+		visitWebsite("http://www.yahoo.com/");
+		sleep(20000);
+		visitWebsite("http://www.baidu.com/");
+		sleep(20000);
+		visitWebsite("http://www.amazon.com/");
+		sleep(20000);
+		visitWebsite("http://www.wikipedia.org/");
+		sleep(20000);
+		visitWebsite("http://www.taobao.com/");
+		sleep(20000);
+		visitWebsite("http://www.twitter.com/");
+		sleep(20000);
+		visitWebsite("http://www.qq.com/");
 		sleep(20000);
 
 		Utils.killTcpdump();
