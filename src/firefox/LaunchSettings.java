@@ -30,6 +30,10 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 		sleep(3000);
 
+		// Parameter / Private Life / Last option
+		System.out.println("\n\n\t## DON'T FORGET TO ENABLE OPTION TO REMOVE TRACES ##\n\n");
+		// or use private mode, or remove traces manually
+
 		Utils.launchTcpdump("firefox", 200);
 
 		for (int i = 0; i < WEBSITES.length; i++) {
