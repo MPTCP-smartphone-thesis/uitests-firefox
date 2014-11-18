@@ -9,6 +9,14 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 	private static final String URL_BAR_ID = "org.mozilla.firefox_beta:id/url_bar_title";
 	private static final String URL_EDIT_ID = "org.mozilla.firefox_beta:id/url_edit_text";
+	private static final String[] WEBSITES = { "http://multpath-tcp.org",
+		"http://www.google.com/", "http://www.facebook.com/",
+		"http://www.youtube.com/", "http://www.yahoo.com/",
+		"http://www.baidu.com/", "http://www.amazon.com/",
+		"http://www.wikipedia.org/", "http://www.taobao.com/",
+		"http://www.twitter.com/", "http://www.qq.com/",
+		"https://imgur.com/", "https://www.flickr.com/",
+		"http://www.nytimes.com/" };
 
 	private void visitWebsite(String url) {
 		Utils.click(URL_BAR_ID);
@@ -24,36 +32,10 @@ public class LaunchSettings extends UiAutomatorTestCase {
 
 		Utils.launchTcpdump("firefox", 200);
 
-		visitWebsite("http://multpath-tcp.org");
-		sleep(20000);
-		visitWebsite("https://www.flickr.com/");
-		sleep(20000);
-		visitWebsite("http://www.nytimes.com/");
-		sleep(20000);
-		visitWebsite("http://www.rtl.be/info");
-		sleep(20000);
-		visitWebsite("http://www.rtbf.be/");
-		sleep(20000);
-		visitWebsite("http://www.google.com/");
-		sleep(20000);
-		visitWebsite("http://www.facebook.com/");
-		sleep(20000);
-		visitWebsite("http://www.youtube.com/");
-		sleep(20000);
-		visitWebsite("http://www.yahoo.com/");
-		sleep(20000);
-		visitWebsite("http://www.baidu.com/");
-		sleep(20000);
-		visitWebsite("http://www.amazon.com/");
-		sleep(20000);
-		visitWebsite("http://www.wikipedia.org/");
-		sleep(20000);
-		visitWebsite("http://www.taobao.com/");
-		sleep(20000);
-		visitWebsite("http://www.twitter.com/");
-		sleep(20000);
-		visitWebsite("http://www.qq.com/");
-		sleep(20000);
+		for (int i = 0; i < WEBSITES.length; i++) {
+			visitWebsite(WEBSITES[i]);
+			sleep(20000);
+		}
 
 		Utils.killTcpdump();
 	}
