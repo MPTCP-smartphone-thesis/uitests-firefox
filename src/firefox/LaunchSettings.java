@@ -34,7 +34,7 @@ public class LaunchSettings extends UiAutomatorTestCase {
 		System.out.println("\n\n\t## DON'T FORGET TO ENABLE OPTION TO REMOVE TRACES ##\n\n");
 		// or use private mode, or remove traces manually
 
-		Utils.launchTcpdump("firefox", 200);
+		Utils.launchTcpdump("firefox");
 
 		for (int i = 0; i < WEBSITES.length; i++) {
 			visitWebsite(WEBSITES[i]);
