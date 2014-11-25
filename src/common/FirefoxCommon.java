@@ -2,6 +2,8 @@ package common;
 
 import utils.Utils;
 
+import com.android.uiautomator.core.UiObject;
+import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class FirefoxCommon {
@@ -33,17 +35,45 @@ public class FirefoxCommon {
 		testCase.getUiDevice().pressEnter();
 	}
 
-	public void testDemo() {
-		assertTrue("OOOOOpps", Utils.openApp(testCase, "Firefox Beta",
+	private void proxy() {
+		// There are two different buttons to indicate if proxy is up or down
+		UiObject enableProxy = Utils.getObjectWithDescription("Enable Proxy");
+		UiObject disableProxy = Utils.getObjectWithDescription("Disable Proxy");
+
+		while (!enableProxy.exists() && !disableProxy.exists()) {
+			testCase.sleep(500);
+			enableProxy = Utils.getObjectWithDescription("Enable Proxy");
+			disableProxy = Utils.getObjectWithDescription("Disable Proxy");
+		}
+
+		if (withProxy) {
+			// If down, set up proxy
+			if (enableProxy.exists()) {
+				Utils.click(enableProxy);
+			}
+		} else {
+			// If up, set down proxy
+			if (disableProxy.exists()) {
+				Utils.click(disableProxy);
+			}
+		}
+	}
+
+	public void testDemo() throws UiObjectNotFoundException {
+		testCase.assertTrue("OOOOOpps", Utils.openApp(testCase, "Firefox Beta",
 				"org.mozilla.firefox_beta"));
 
 		testCase.sleep(3000);
+
+		// First enable or disable the proxy
+		proxy();
 
 		Utils.launchTcpdump(tcpdump);
 
 		// Settings / Privacy / Last option
 		System.out.println("\n\n\t## DON'T FORGET TO ENABLE OPTION TO REMOVE TRACES ##\n\n");
 		// or use private mode, or remove traces manually
+
 
 		for (int i = 0; i < WEBSITES.length; i++) {
 			visitWebsite(WEBSITES[i]);
