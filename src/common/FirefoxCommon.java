@@ -17,6 +17,7 @@ public class FirefoxCommon {
 			"http://www.twitter.com/", "http://www.qq.com/",
 			"https://imgur.com/", "https://www.flickr.com/",
 			"http://www.nytimes.com/" };
+	private static final int LIMIT = 4;
 
 	private final UiAutomatorTestCase testCase;
 	private final String tcpdump;
@@ -73,7 +74,7 @@ public class FirefoxCommon {
 			Utils.launchTcpdump(tcpdump, iface);
 		}
 
-		for (int i = 0; i < WEBSITES.length; i++) {
+		for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
 			visitWebsite(WEBSITES[i]);
 			testCase.sleep(20000);
 		}
