@@ -68,18 +68,18 @@ public class FirefoxCommon {
 		// First enable or disable the proxy
 		proxy();
 
-		Utils.launchTcpdump(tcpdump);
-
-		// Settings / Privacy / Last option
-		System.out.println("\n\n\t## DON'T FORGET TO ENABLE OPTION TO REMOVE TRACES ##\n\n");
-		// or use private mode, or remove traces manually
-
+		String iface = testCase.getParams().getString("iface");
+		if (iface != null) {
+			Utils.launchTcpdump(tcpdump, iface);
+		}
 
 		for (int i = 0; i < WEBSITES.length; i++) {
 			visitWebsite(WEBSITES[i]);
 			testCase.sleep(20000);
 		}
 
-		Utils.killTcpdump();
+		if (iface != null) {
+			Utils.killTcpdump();
+		}
 	}
 }
