@@ -69,18 +69,9 @@ public class FirefoxCommon {
 		// First enable or disable the proxy
 		proxy();
 
-		String iface = testCase.getParams().getString("iface");
-		if (iface != null) {
-			Utils.launchTcpdump(tcpdump, iface);
-		}
-
 		for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
 			visitWebsite(WEBSITES[i]);
 			testCase.sleep(2000);
-		}
-
-		if (iface != null) {
-			Utils.killTcpdump();
 		}
 	}
 }
