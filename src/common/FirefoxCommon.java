@@ -61,7 +61,8 @@ public class FirefoxCommon {
 	}
 
 	public void testDemo() throws UiObjectNotFoundException {
-		testCase.assertTrue("OOOOOpps", Utils.openApp(testCase, "Firefox Beta",
+		UiAutomatorTestCase.assertTrue("OOOOOpps", Utils.openApp(testCase,
+				"Firefox Beta",
 				"org.mozilla.firefox_beta"));
 
 		testCase.sleep(3000);
