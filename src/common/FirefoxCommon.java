@@ -9,15 +9,14 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 public class FirefoxCommon {
 	private static final String URL_BAR_ID = "org.mozilla.firefox_beta:id/url_bar_title";
 	private static final String URL_EDIT_ID = "org.mozilla.firefox_beta:id/url_edit_text";
-	private static final String[] WEBSITES = { "http://multpath-tcp.org",
+	private static final String[] WEBSITES = {
 			"http://www.google.com/", "http://www.facebook.com/",
 			"http://www.youtube.com/", "http://www.yahoo.com/",
 			"http://www.baidu.com/", "http://www.amazon.com/",
-			"http://www.wikipedia.org/", "http://www.taobao.com/",
-			"http://www.twitter.com/", "http://www.qq.com/",
-			"https://imgur.com/", "https://www.flickr.com/",
-			"http://www.nytimes.com/" };
-	private static final int LIMIT = 14;
+			"http://www.wikipedia.org/", "http://www.twitter.com/",
+			"http://www.qq.com/", "https://imgur.com/",
+			"https://www.flickr.com/", "http://www.nytimes.com/" };
+	private static final int LIMIT = 13;
 
 	private final UiAutomatorTestCase testCase;
 	private final String tcpdump;
@@ -32,7 +31,7 @@ public class FirefoxCommon {
 
 	private void visitWebsite(String url) {
 		Utils.click(URL_BAR_ID);
-		Utils.setText(URL_EDIT_ID, url);
+		Utils.setText(URL_EDIT_ID, url, false);
 		testCase.getUiDevice().pressEnter();
 	}
 
@@ -64,14 +63,16 @@ public class FirefoxCommon {
 		UiAutomatorTestCase.assertTrue("OOOOOpps",
 			Utils.openApp(testCase, "Firefox Beta", "org.mozilla.firefox_beta"));
 
-		testCase.sleep(3000);
+		testCase.sleep(1000);
 
 		// First enable or disable the proxy
 		proxy();
 
 		for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
 			visitWebsite(WEBSITES[i]);
-			testCase.sleep(2000);
+			// 1s: No need more, it takes times to write a new address...
+			testCase.sleep(1000);
 		}
+		testCase.sleep(2000); // wait for loading the last webpage
 	}
 }
