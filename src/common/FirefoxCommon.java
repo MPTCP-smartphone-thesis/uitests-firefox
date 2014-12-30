@@ -19,13 +19,10 @@ public class FirefoxCommon {
 	private static final int LIMIT = 13;
 
 	private final UiAutomatorTestCase testCase;
-	private final String tcpdump;
 	private final boolean withProxy;
 
-	public FirefoxCommon(UiAutomatorTestCase testCase, String tcpdump,
-			boolean withProxy) {
+	public FirefoxCommon(UiAutomatorTestCase testCase, boolean withProxy) {
 		this.testCase = testCase;
-		this.tcpdump = tcpdump;
 		this.withProxy = withProxy;
 	}
 
