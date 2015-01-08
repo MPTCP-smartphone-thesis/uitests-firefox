@@ -17,6 +17,7 @@ public class FirefoxCommon {
 			"http://www.qq.com/", "https://imgur.com/",
 			"https://www.flickr.com/", "http://www.nytimes.com/" };
 	private static final int LIMIT = 13;
+	private static int NB_TIMES = 1;
 
 	private final UiAutomatorTestCase testCase;
 	private final boolean withProxy;
@@ -61,17 +62,19 @@ public class FirefoxCommon {
 				Utils.openApp(testCase, "Firefox Beta",
 						"org.mozilla.firefox_beta",
 						".App"));
-
+		NB_TIMES = Math.max(1, (int) (NB_TIMES * Utils.getMultTime(testCase)));
 		testCase.sleep(1000);
 
 		// First enable or disable the proxy
 		proxy();
 
-		for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
-			visitWebsite(WEBSITES[i]);
-			// 1s: No need more, it takes times to write a new address...
-			testCase.sleep(1000);
+		for (int j = 0; j < NB_TIMES; j++) {
+			for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
+				visitWebsite(WEBSITES[i]);
+				// 1s: No need more, it takes times to write a new address...
+				testCase.sleep(1000);
+			}
+			testCase.sleep(2000); // wait for loading the last webpage
 		}
-		testCase.sleep(2000); // wait for loading the last webpage
 	}
 }
