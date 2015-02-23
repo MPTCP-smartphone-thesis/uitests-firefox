@@ -9,6 +9,7 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 public class FirefoxCommon {
 	private static final String URL_BAR_ID = "org.mozilla.firefox_beta:id/url_bar_title";
 	private static final String URL_EDIT_ID = "org.mozilla.firefox_beta:id/url_edit_text";
+	private static final String PACKAGE_NAME = "org.mozilla.firefox_beta";
 	private static final String[] WEBSITES = {
 			"http://www.google.com/", "http://www.facebook.com/",
 			"http://www.youtube.com/", "http://www.yahoo.com/",
@@ -58,9 +59,10 @@ public class FirefoxCommon {
 	}
 
 	public void testDemo() throws UiObjectNotFoundException {
+
 		UiAutomatorTestCase.assertTrue("OOOOOpps",
 				Utils.openApp(testCase, "Firefox Beta",
-						"org.mozilla.firefox_beta",
+						PACKAGE_NAME,
 						".App"));
 		NB_TIMES = Math.max(1, (int) (NB_TIMES * Utils.getMultTime(testCase)));
 		testCase.sleep(1000);
@@ -76,5 +78,6 @@ public class FirefoxCommon {
 			}
 			testCase.sleep(2000); // wait for loading the last webpage
 		}
+		Utils.runAsUser("am kill " + PACKAGE_NAME); // kill to be sure to erase data
 	}
 }
