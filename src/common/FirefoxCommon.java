@@ -22,10 +22,13 @@ public class FirefoxCommon {
 
 	private final UiAutomatorTestCase testCase;
 	private final boolean withProxy;
+	private final boolean proxySupported;
 
-	public FirefoxCommon(UiAutomatorTestCase testCase, boolean withProxy) {
+	public FirefoxCommon(UiAutomatorTestCase testCase, boolean proxySupported,
+			boolean withProxy) {
 		this.testCase = testCase;
 		this.withProxy = withProxy;
+		this.proxySupported = proxySupported;
 	}
 
 	private void visitWebsite(String url) {
@@ -68,7 +71,8 @@ public class FirefoxCommon {
 		testCase.sleep(1000);
 
 		// First enable or disable the proxy
-		proxy();
+		if (proxySupported)
+			proxy();
 
 		for (int j = 0; j < NB_TIMES; j++) {
 			for (int i = 0; i < WEBSITES.length && (LIMIT < 0 || i < LIMIT); i++) {
